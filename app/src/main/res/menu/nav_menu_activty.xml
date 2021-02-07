@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+      android:id="@+id/home_scr"
+      android:title="Announcements"
+      android:icon="@drawable/ic_icon_material_home" />
+  <item
+      android:id="@+id/permission_scr"
+      android:title="Approve Students"
+      android:icon="@drawable/ic_permission_screen" />
+  <item
+      android:id="@+id/reject_scr"
+      android:title="Rejected Students"
+      android:icon="@drawable/ic_rejected_students"
+      />
+    <item
+        android:id="@+id/classfellow_scr"
+        android:title="Students"
+        android:icon="@drawable/ic_icon_material_class"
+        android:iconTint="#000000"/>
+
+    <item
+        android:id="@+id/logout_scr"
+        android:title="Logout"
+        android:icon="@drawable/ic_icon_open_account_logout" />
+
+
+
+</menu>
