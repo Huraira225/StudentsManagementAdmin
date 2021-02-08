@@ -1,4 +1,4 @@
-package com.example.adminloginactivity;
+package com.example.adminloginactivity.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.adminloginactivity.Dialogs.ApprovalItemsListActivity;
+import com.example.adminloginactivity.MailAPI.JavaMailAPI;
+import com.example.adminloginactivity.R;
+import com.example.adminloginactivity.Classes.RegisterUsers;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegistrationApprovalActivity extends AppCompatActivity implements View.OnClickListener {
+public class RejectedStudentsActivity extends AppCompatActivity implements View.OnClickListener {
     ListView listView;
     DatabaseReference databaseReference;
     String approve;
@@ -32,14 +36,13 @@ public class RegistrationApprovalActivity extends AppCompatActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration_appeoval);
-
+        setContentView(R.layout.activity_rejected_students);
         databaseReference= FirebaseDatabase.getInstance().getReference("Students");
         listView=findViewById(R.id.listView_permissions);
         TextView textView=findViewById(R.id.textView_student_back);
         textView.setOnClickListener(this);
         Users = new ArrayList<>();
-        databaseReference.orderByChild("approve").equalTo("no").addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByChild("approve").equalTo("reject").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -54,7 +57,7 @@ public class RegistrationApprovalActivity extends AppCompatActivity implements V
                     Users.add(User);
                 }
                 //creating Userlist adapter
-                RegistrationApprovalItemsListActivity UserAdapter = new RegistrationApprovalItemsListActivity(RegistrationApprovalActivity.this, Users);
+                ApprovalItemsListActivity UserAdapter = new ApprovalItemsListActivity(RejectedStudentsActivity.this, Users);
                 //attaching adapter to the listview
                 listView.setAdapter(UserAdapter);
             }
@@ -66,20 +69,20 @@ public class RegistrationApprovalActivity extends AppCompatActivity implements V
 
 
 
-     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            RegisterUsers User = Users.get(i);
-            Call( User.getFirstname(),User.getLastname(),User.getUsername(),User.getCnic(),User.getPhoneno(),User.getEmail(),User.getApprove(),User.getId());
-        }
-    });
-}
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                RegisterUsers User = Users.get(i);
+                Call( User.getFirstname(),User.getLastname(),User.getUsername(),User.getCnic(),User.getPhoneno(),User.getEmail(),User.getApprove(),User.getId());
+            }
+        });
+    }
 
     private void Call(final String firstname, final String lastname, final String username, final String cnic , final String phoneno, final String email, final String approve , final String id) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.activity_registration_approval_pop_up_, null);
+        final View dialogView = inflater.inflate(R.layout.activity_approval_pop_up_dialog, null);
         dialogBuilder.setView(dialogView);
         //Access Dialog views
         final TextView updateTextFirstname =  dialogView.findViewById(R.id.editText_firstname);
@@ -110,16 +113,16 @@ public class RegistrationApprovalActivity extends AppCompatActivity implements V
             public void onClick(View view) {
 
 
-                    String approve="yes";
+                String approve="yes";
                 databaseReference.child(id).child("approve").setValue(approve);
 
                 String subject="Student Management";
                 String message="Registered your Account Please Login!";
-                JavaMailAPI javaMailAPI=new JavaMailAPI(RegistrationApprovalActivity.this, email,subject,message);
+                JavaMailAPI javaMailAPI=new JavaMailAPI(RejectedStudentsActivity.this, email,subject,message);
                 javaMailAPI.execute();
                 Toast.makeText(getApplicationContext(), "Student Approved", Toast.LENGTH_LONG).show();
-                    b.dismiss();
-                }
+                b.dismiss();
+            }
 
         });
         // Click listener for Delete data
@@ -127,13 +130,6 @@ public class RegistrationApprovalActivity extends AppCompatActivity implements V
             @Override
             public void onClick(View view) {
                 //Send Email With Java Mail Api
-                String approve="reject";
-                databaseReference.child(id).child("approve").setValue(approve);
-
-                String subject="Student Management";
-                String message="Your registeration is cancelled Please contact to Admin";
-                JavaMailAPI javaMailAPI=new JavaMailAPI(RegistrationApprovalActivity.this, email,subject,message);
-                Toast.makeText(getApplicationContext(), "Student Approval Rejected", Toast.LENGTH_LONG).show();
                 b.dismiss();
             }
         });
@@ -141,8 +137,9 @@ public class RegistrationApprovalActivity extends AppCompatActivity implements V
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(RegistrationApprovalActivity.this, MainActivity.class);
+        Intent intent = new Intent(RejectedStudentsActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }
+
 }

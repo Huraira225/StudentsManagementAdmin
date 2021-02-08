@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:id="@+id/drawar"
         tools:openDrawer="start"
-        tools:context=".MainActivity">
+        tools:context=".Activities.HomeActivity">
 
     <include
         layout="@layout/app_bar_main"
@@ -16,7 +16,7 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:id="@+id/nav"
-    app:headerLayout="@layout/header_layout_screen"
+    app:headerLayout="@layout/activity_header_layout"
     app:menu="@menu/nav_menu_activty"
     android:layout_gravity="start"/>
 </androidx.drawerlayout.widget.DrawerLayout>

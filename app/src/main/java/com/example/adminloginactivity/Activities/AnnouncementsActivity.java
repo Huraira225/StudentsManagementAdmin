@@ -1,4 +1,4 @@
-package com.example.adminloginactivity;
+package com.example.adminloginactivity.Activities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,6 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.adminloginactivity.Classes.AnnouncementsGetterSetter;
+import com.example.adminloginactivity.Adapters.AnnouncementsList;
+import com.example.adminloginactivity.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -112,7 +116,7 @@ public class AnnouncementsActivity extends AppCompatActivity implements View.OnC
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
 
-        final View dialogView = inflater.inflate(R.layout.update_announcements_dialog, null);
+        final View dialogView = inflater.inflate(R.layout.activity_announcements_dialog, null);
         dialogBuilder.setView(dialogView);
         //Access Dialog views
         final EditText updateTextname = (EditText) dialogView.findViewById(R.id.updateText_title);
@@ -210,7 +214,7 @@ public class AnnouncementsActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
-            Intent intent = new Intent(AnnouncementsActivity.this, MainActivity.class);
+            Intent intent = new Intent(AnnouncementsActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
     }

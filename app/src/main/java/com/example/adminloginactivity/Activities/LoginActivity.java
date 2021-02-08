@@ -1,4 +1,4 @@
-package com.example.adminloginactivity;
+package com.example.adminloginactivity.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.adminloginactivity.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class AdminLoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     String Email,Password;
     EditText etEmail, etPassword;
@@ -35,7 +36,7 @@ public class AdminLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_login);
+        setContentView(R.layout.activity_login);
 
 
         etEmail = (EditText) findViewById(R.id.editText_email);
@@ -90,7 +91,7 @@ public class AdminLoginActivity extends AppCompatActivity {
 
                 //authenticate user
                 auth.signInWithEmailAndPassword(Email, Password)
-                        .addOnCompleteListener(AdminLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 // If sign in fails, display a message to the user. If sign in succeeds
@@ -99,15 +100,15 @@ public class AdminLoginActivity extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                                 if (!task.isSuccessful()) {
 
-                                    Toast.makeText(AdminLoginActivity.this,"Authentication failed, check your email and password or sign up", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this,"Authentication failed, check your email and password or sign up", Toast.LENGTH_LONG).show();
 
                                 } else {
                                     SharedPreferences preferences = getSharedPreferences("admin", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = preferences.edit();
                                     editor.putString("isadminLogin", "adminLogin");
                                     editor.commit();
-                                    Toast.makeText(AdminLoginActivity.this,"User login in this Activity", Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(AdminLoginActivity.this,MainActivity.class);
+                                    Toast.makeText(LoginActivity.this,"User login in this Activity", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }

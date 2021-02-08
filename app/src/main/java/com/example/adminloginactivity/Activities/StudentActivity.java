@@ -1,4 +1,4 @@
-package com.example.adminloginactivity;
+package com.example.adminloginactivity.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +17,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.adminloginactivity.Dialogs.ItemsListActivity;
+import com.example.adminloginactivity.R;
+import com.example.adminloginactivity.Classes.RegisterUsers;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -83,7 +86,7 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.activity_students_home_pop_up_, null);
+        final View dialogView = inflater.inflate(R.layout.activity_students_pop_up_dialog, null);
         dialogBuilder.setView(dialogView);
         //Access Dialog views
         final EditText updateTextFirstname = (EditText) dialogView.findViewById(R.id.editText_firstname);
@@ -169,7 +172,7 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(StudentActivity.this, MainActivity.class);
+        Intent intent = new Intent(StudentActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }

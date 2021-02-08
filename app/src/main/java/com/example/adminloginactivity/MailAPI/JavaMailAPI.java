@@ -1,4 +1,4 @@
-package com.example.adminloginactivity;
+package com.example.adminloginactivity.MailAPI;
 
 
 import android.app.ProgressDialog;

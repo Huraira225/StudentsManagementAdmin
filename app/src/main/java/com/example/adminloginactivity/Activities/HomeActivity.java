@@ -1,4 +1,4 @@
-package com.example.adminloginactivity;
+package com.example.adminloginactivity.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,16 +16,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.adminloginactivity.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn1 ,btn2;
     TextView firstName,email;
     NavigationView navigationView;
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         auth= FirebaseAuth.getInstance();
         currentUser=auth.getCurrentUser();
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String uid=currentUser.getUid();
             profileUserRef = FirebaseDatabase.getInstance().getReference().child("admin").child(uid);            //User is Logged in
         }else{
-            startActivity(new Intent(MainActivity.this,AdminLoginActivity.class));
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             finish();
         }
 
@@ -81,19 +79,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
            {
                switch (menuItem.getItemId()){
                    case R.id.home_scr:
-                       startActivity(new Intent(MainActivity.this, AnnouncementsActivity.class));
+                       startActivity(new Intent(HomeActivity.this, AnnouncementsActivity.class));
                        drawerLayout.closeDrawer(GravityCompat.START);
                        break;
                    case R.id.permission_scr:
-                       startActivity(new Intent(MainActivity.this, RegistrationApprovalActivity.class));
+                       startActivity(new Intent(HomeActivity.this, ApprovalActivity.class));
                        drawerLayout.closeDrawer(GravityCompat.START);
                        break;
                    case R.id.reject_scr:
-                       startActivity(new Intent(MainActivity.this, RejectedStudents.class));
+                       startActivity(new Intent(HomeActivity.this, RejectedStudentsActivity.class));
                        drawerLayout.closeDrawer(GravityCompat.START);
                        break;
                    case R.id.classfellow_scr:
-                       startActivity(new Intent(MainActivity.this, StudentActivity.class));
+                       startActivity(new Intent(HomeActivity.this, StudentActivity.class));
                        drawerLayout.closeDrawer(GravityCompat.START);
                        break;
                    case R.id.logout_scr:
@@ -102,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                        editor.putString("isadminLogin","adminLogout");
                        editor.commit();
                        auth.getInstance().signOut();
-                       Intent intent = new Intent(MainActivity.this,AdminLoginActivity.class);
+                       Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                        startActivity(intent);
                        break;
                }
@@ -118,10 +116,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         int id = view.getId();
         if(id == R.id.button_profile){
-            startActivity(new Intent(MainActivity.this,AnnouncementsActivity.class));
+            startActivity(new Intent(HomeActivity.this,AnnouncementsActivity.class));
         }
         else if (id == R.id.button_classfellow){
-            startActivity(new Intent(MainActivity.this, StudentActivity.class));
+            startActivity(new Intent(HomeActivity.this, StudentActivity.class));
         }
     }
 

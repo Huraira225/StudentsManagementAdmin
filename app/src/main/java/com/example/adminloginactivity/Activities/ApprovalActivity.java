@@ -1,4 +1,4 @@
-package com.example.adminloginactivity;
+package com.example.adminloginactivity.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.adminloginactivity.Dialogs.ApprovalItemsListActivity;
+import com.example.adminloginactivity.MailAPI.JavaMailAPI;
+import com.example.adminloginactivity.R;
+import com.example.adminloginactivity.Classes.RegisterUsers;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RejectedStudents extends AppCompatActivity implements View.OnClickListener {
+public class ApprovalActivity extends AppCompatActivity implements View.OnClickListener {
     ListView listView;
     DatabaseReference databaseReference;
     String approve;
@@ -32,13 +36,14 @@ public class RejectedStudents extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rejected_students);
+        setContentView(R.layout.activity_approval);
+
         databaseReference= FirebaseDatabase.getInstance().getReference("Students");
         listView=findViewById(R.id.listView_permissions);
         TextView textView=findViewById(R.id.textView_student_back);
         textView.setOnClickListener(this);
         Users = new ArrayList<>();
-        databaseReference.orderByChild("approve").equalTo("reject").addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByChild("approve").equalTo("no").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -53,7 +58,7 @@ public class RejectedStudents extends AppCompatActivity implements View.OnClickL
                     Users.add(User);
                 }
                 //creating Userlist adapter
-                RegistrationApprovalItemsListActivity UserAdapter = new RegistrationApprovalItemsListActivity(RejectedStudents.this, Users);
+                ApprovalItemsListActivity UserAdapter = new ApprovalItemsListActivity(ApprovalActivity.this, Users);
                 //attaching adapter to the listview
                 listView.setAdapter(UserAdapter);
             }
@@ -65,20 +70,20 @@ public class RejectedStudents extends AppCompatActivity implements View.OnClickL
 
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                RegisterUsers User = Users.get(i);
-                Call( User.getFirstname(),User.getLastname(),User.getUsername(),User.getCnic(),User.getPhoneno(),User.getEmail(),User.getApprove(),User.getId());
-            }
-        });
-    }
+     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            RegisterUsers User = Users.get(i);
+            Call( User.getFirstname(),User.getLastname(),User.getUsername(),User.getCnic(),User.getPhoneno(),User.getEmail(),User.getApprove(),User.getId());
+        }
+    });
+}
 
     private void Call(final String firstname, final String lastname, final String username, final String cnic , final String phoneno, final String email, final String approve , final String id) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.activity_registration_approval_pop_up_, null);
+        final View dialogView = inflater.inflate(R.layout.activity_approval_pop_up_dialog, null);
         dialogBuilder.setView(dialogView);
         //Access Dialog views
         final TextView updateTextFirstname =  dialogView.findViewById(R.id.editText_firstname);
@@ -109,16 +114,16 @@ public class RejectedStudents extends AppCompatActivity implements View.OnClickL
             public void onClick(View view) {
 
 
-                String approve="yes";
+                    String approve="yes";
                 databaseReference.child(id).child("approve").setValue(approve);
 
                 String subject="Student Management";
                 String message="Registered your Account Please Login!";
-                JavaMailAPI javaMailAPI=new JavaMailAPI(RejectedStudents.this, email,subject,message);
+                JavaMailAPI javaMailAPI=new JavaMailAPI(ApprovalActivity.this, email,subject,message);
                 javaMailAPI.execute();
                 Toast.makeText(getApplicationContext(), "Student Approved", Toast.LENGTH_LONG).show();
-                b.dismiss();
-            }
+                    b.dismiss();
+                }
 
         });
         // Click listener for Delete data
@@ -126,6 +131,13 @@ public class RejectedStudents extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View view) {
                 //Send Email With Java Mail Api
+                String approve="reject";
+                databaseReference.child(id).child("approve").setValue(approve);
+
+                String subject="Student Management";
+                String message="Your registeration is cancelled Please contact to Admin";
+                JavaMailAPI javaMailAPI=new JavaMailAPI(ApprovalActivity.this, email,subject,message);
+                Toast.makeText(getApplicationContext(), "Student Approval Rejected", Toast.LENGTH_LONG).show();
                 b.dismiss();
             }
         });
@@ -133,9 +145,8 @@ public class RejectedStudents extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(RejectedStudents.this, MainActivity.class);
+        Intent intent = new Intent(ApprovalActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }
-
 }
