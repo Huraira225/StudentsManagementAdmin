@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.Activities;
+package com.example.adminloginactivity.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         etEmail = (EditText) findViewById(R.id.editText_email);
         etPassword = (EditText) findViewById(R.id.editText_password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -48,9 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         databaseReference= FirebaseDatabase.getInstance("https://databaseregisterationuser-default-rtdb.firebaseio.com/").getReference("admin");
-
-
-
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,20 +71,17 @@ public class LoginActivity extends AppCompatActivity {
                     etEmail.requestFocus();
                     return;
                 }
-
                 if (TextUtils.isEmpty(Password)) {
                     etPassword.setError("password is required");
                     etPassword.requestFocus();
                     return;
                 }
-
                 if (Password.length() < 6) {
                     etPassword.setError("Password too short, enter minimum 6 characters!");
                     etPassword.requestFocus();
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
-
                 //authenticate user
                 auth.signInWithEmailAndPassword(Email, Password)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {

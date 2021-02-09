@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.Activities;
+package com.example.adminloginactivity.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -43,8 +43,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String uid=currentUser.getUid();
@@ -53,8 +51,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             finish();
         }
-
-
 
         btn1=findViewById(R.id.button_profile);
         btn2=findViewById(R.id.button_classfellow);
@@ -67,11 +63,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         email = (TextView)headerView.findViewById(R.id.Textview_header_email);
 
         drawerLayout=findViewById(R.id.drawar);
-
        toggle =new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
        drawerLayout.addDrawerListener(toggle);
        toggle.syncState();
-
 
        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
            @Override
@@ -104,12 +98,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                        startActivity(intent);
                        break;
                }
-
                return true;
            }
        });
-
-
     }
 
     @Override
@@ -122,6 +113,5 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(HomeActivity.this, StudentActivity.class));
         }
     }
-
     }
 

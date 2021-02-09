@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.Classes;
+package com.example.adminloginactivity.classes;
 
 public class RegisterUsers {
     String firstname,lastname,username,cnic,phoneno, email, approve, id;
@@ -72,7 +72,6 @@ public class RegisterUsers {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     public String getId() {
         return id;

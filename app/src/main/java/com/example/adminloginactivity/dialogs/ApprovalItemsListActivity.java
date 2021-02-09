@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.Dialogs;
+package com.example.adminloginactivity.dialogs;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,33 +7,29 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.adminloginactivity.Classes.RegisterUsers;
+import com.example.adminloginactivity.classes.RegisterUsers;
 import com.example.adminloginactivity.R;
 
 import java.util.List;
 
-public class ItemsListActivity extends ArrayAdapter<RegisterUsers> {
-
+public class ApprovalItemsListActivity extends ArrayAdapter<RegisterUsers> {
 
     private Activity context;
     //list of users
     List<RegisterUsers> Users;
-
-    public ItemsListActivity(Activity context, List<RegisterUsers> Users) {
-        super(context, R.layout.activity_classfellows_list_items, Users);
+    public ApprovalItemsListActivity(Activity context, List<RegisterUsers> Users) {
+        super(context, R.layout.layout_classfellows_list_items, Users);
         this.context = context;
         this.Users = Users;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.activity_classfellows_list_items, null, true);
+        View listViewItem = inflater.inflate(R.layout.layout_classfellows_list_items, null, true);
         //initialize
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textview_Header_name);
         TextView textviewemail = (TextView) listViewItem.findViewById(R.id.textview_Header_email);
-
         //getting user at position
         RegisterUsers User = Users.get(position);
         //set user name

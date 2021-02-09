@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.Activities;
+package com.example.adminloginactivity.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,9 +17,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.adminloginactivity.Dialogs.ItemsListActivity;
+import com.example.adminloginactivity.dialogs.ItemsListActivity;
 import com.example.adminloginactivity.R;
-import com.example.adminloginactivity.Classes.RegisterUsers;
+import com.example.adminloginactivity.classes.RegisterUsers;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,8 +41,8 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_student);
 
         databaseReference= FirebaseDatabase.getInstance("https://databaseregisterationuser-default-rtdb.firebaseio.com/").getReference("Students");
-        listView=findViewById(R.id.listViewUsers);
 
+        listView=findViewById(R.id.listViewUsers);
 
         TextView textView=findViewById(R.id.textView_student_back);
         textView.setOnClickListener(this);
@@ -51,10 +51,8 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 //clearing the previous User list
                 Users.clear();
-
                 //getting all nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //getting User from firebase console
@@ -86,7 +84,7 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.activity_students_pop_up_dialog, null);
+        final View dialogView = inflater.inflate(R.layout.layout_dialog_students, null);
         dialogBuilder.setView(dialogView);
         //Access Dialog views
         final EditText updateTextFirstname = (EditText) dialogView.findViewById(R.id.editText_firstname);
@@ -102,7 +100,6 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
         updateTextCnic.setText(cnic);
         updateTextPhoneno.setText(phoneno);
         updateTextEmail.setText(email);
-
 
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.button_Update);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.button_Delete);

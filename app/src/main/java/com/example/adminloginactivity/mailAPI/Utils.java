@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.MailAPI;
+package com.example.adminloginactivity.mailAPI;
 
 public class Utils {
     public static final String EMAIL="apiproject26@gmail.com";

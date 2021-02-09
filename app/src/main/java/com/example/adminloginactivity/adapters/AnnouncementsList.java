@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.Adapters;
+package com.example.adminloginactivity.adapters;
 
 
 import android.app.Activity;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.adminloginactivity.Classes.AnnouncementsGetterSetter;
+import com.example.adminloginactivity.classes.AnnouncementsGetterSetter;
 import com.example.adminloginactivity.R;
 
 import java.text.SimpleDateFormat;
@@ -20,18 +20,16 @@ public class AnnouncementsList extends ArrayAdapter<AnnouncementsGetterSetter> {
     private Activity context;
     //list of users
     List<AnnouncementsGetterSetter> Users;
-
     public AnnouncementsList(Activity context, List<AnnouncementsGetterSetter> Users) {
-        super(context, R.layout.activity_announcements_list_items, Users);
+        super(context, R.layout.layout_announcements_list_items, Users);
         this.context = context;
         this.Users = Users;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.activity_announcements_list_items, null, true);
+        View listViewItem = inflater.inflate(R.layout.layout_announcements_list_items, null, true);
         //initialize
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textView_title);
         TextView textviewemail = (TextView) listViewItem.findViewById(R.id.textview_accouncements);

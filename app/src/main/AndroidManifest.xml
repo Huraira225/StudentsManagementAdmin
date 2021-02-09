@@ -11,19 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.RejectedStudentsActivity"></activity>
-        <activity android:name=".Activities.ApprovalActivity" />
-        <activity android:name=".Activities.StudentActivity" />
-        <activity android:name=".Activities.AnnouncementsActivity" />
-        <activity android:name=".Activities.HomeActivity" />
-        <activity android:name=".Activities.SplashScreenActivity">
+        <activity android:name=".activities.RejectedStudentsActivity"></activity>
+        <activity android:name=".activities.ApprovalActivity" />
+        <activity android:name=".activities.StudentActivity" />
+        <activity android:name=".activities.AnnouncementsActivity" />
+        <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".activities.LoginActivity" />
     </application>
 
 </manifest>

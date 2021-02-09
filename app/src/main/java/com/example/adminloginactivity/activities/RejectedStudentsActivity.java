@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.Activities;
+package com.example.adminloginactivity.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,10 +15,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.adminloginactivity.Dialogs.ApprovalItemsListActivity;
-import com.example.adminloginactivity.MailAPI.JavaMailAPI;
+import com.example.adminloginactivity.dialogs.ApprovalItemsListActivity;
+import com.example.adminloginactivity.mailAPI.JavaMailAPI;
 import com.example.adminloginactivity.R;
-import com.example.adminloginactivity.Classes.RegisterUsers;
+import com.example.adminloginactivity.classes.RegisterUsers;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,10 +45,8 @@ public class RejectedStudentsActivity extends AppCompatActivity implements View.
         databaseReference.orderByChild("approve").equalTo("reject").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 //clearing the previous User list
                 Users.clear();
-
                 //getting all nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //getting User from firebase console
@@ -67,8 +65,6 @@ public class RejectedStudentsActivity extends AppCompatActivity implements View.
             }
         });
 
-
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -82,7 +78,7 @@ public class RejectedStudentsActivity extends AppCompatActivity implements View.
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.activity_approval_pop_up_dialog, null);
+        final View dialogView = inflater.inflate(R.layout.layout_dialog_approval, null);
         dialogBuilder.setView(dialogView);
         //Access Dialog views
         final TextView updateTextFirstname =  dialogView.findViewById(R.id.editText_firstname);
@@ -99,8 +95,6 @@ public class RejectedStudentsActivity extends AppCompatActivity implements View.
         updateTextPhoneno.setText(phoneno);
         updateTextEmail.setText(email);
 
-
-
         final Button buttonApprove = (Button) dialogView.findViewById(R.id.button_Approve);
         final Button buttonReject = (Button) dialogView.findViewById(R.id.button_Reject);
         //username for set dialog title
@@ -111,7 +105,6 @@ public class RejectedStudentsActivity extends AppCompatActivity implements View.
         buttonApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 String approve="yes";
                 databaseReference.child(id).child("approve").setValue(approve);

@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.MailAPI;
+package com.example.adminloginactivity.mailAPI;
 
 
 import android.app.ProgressDialog;
@@ -17,13 +17,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
-
-    //Add those line in dependencies
-    //implementation files('libs/activation.jar')
-    //implementation files('libs/additionnal.jar')
-    //implementation files('libs/mail.jar')
-
-    //Need INTERNET permission
 
     //Variables
     private Context mContext;

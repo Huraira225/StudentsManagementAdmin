@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rounded_edittext_corner"
+    android:background="@drawable/bg_rounded_border_corner"
     tools:ignore="MissingDefaultResource">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:background="@drawable/rounded_edittext_corner"
+        android:background="@drawable/bg_rounded_border_corner"
         android:orientation="vertical"
         android:padding="40dp"
         tools:layout_editor_absoluteX="124dp"
@@ -20,7 +20,7 @@
             android:id="@+id/login_dp"
             android:layout_width="117dp"
             android:layout_height="93dp"
-            android:src="@drawable/profile_screen_ic"
+            android:src="@drawable/ic_profile_screen"
             tools:layout_editor_absoluteX="152dp"
             tools:layout_editor_absoluteY="104dp" />
 
@@ -114,7 +114,7 @@
                 android:id="@+id/button_Reject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/login_rounded_button"
+                android:background="@drawable/bg_login_rounded_button"
                 android:layout_weight="1"
                 android:layout_margin="10dp"
                 android:text="Reject" />
@@ -123,7 +123,7 @@
                 android:id="@+id/button_Approve"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/login_rounded_button"
+                android:background="@drawable/bg_login_rounded_button"
                 android:layout_weight="1"
                 android:layout_margin="10dp"
                 android:text="Approve" />

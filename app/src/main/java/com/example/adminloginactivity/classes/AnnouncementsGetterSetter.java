@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.Classes;
+package com.example.adminloginactivity.classes;
 
 public class AnnouncementsGetterSetter {
     private String userid;

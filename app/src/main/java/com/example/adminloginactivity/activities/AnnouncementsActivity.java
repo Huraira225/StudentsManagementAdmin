@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.Activities;
+package com.example.adminloginactivity.activities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,8 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.adminloginactivity.Classes.AnnouncementsGetterSetter;
-import com.example.adminloginactivity.Adapters.AnnouncementsList;
+import com.example.adminloginactivity.classes.AnnouncementsGetterSetter;
+import com.example.adminloginactivity.adapters.AnnouncementsList;
 import com.example.adminloginactivity.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,27 +27,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnnouncementsActivity extends AppCompatActivity implements View.OnClickListener {
-
-
     //initialize
     EditText editTextTile, editTextAnnouncements;
     Button buttonAnnouncements;
     ListView listViewUsers;
-
-
     //a list to store all the User from firebase database
     List<AnnouncementsGetterSetter> Users;
 
     DatabaseReference databaseReference;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_announcements);
 
-        TextView textView= findViewById(R.id.textView_announcement_back);
         databaseReference = FirebaseDatabase.getInstance("https://databaseregisterationuser-default-rtdb.firebaseio.com/").getReference("Announcements");
 
+        TextView textView= findViewById(R.id.textView_announcement_back);
         editTextTile = (EditText) findViewById(R.id.editText_title);
         editTextAnnouncements = (EditText) findViewById(R.id.editText_announcements);
         listViewUsers = (ListView) findViewById(R.id.listView_announcements);
@@ -77,10 +72,6 @@ public class AnnouncementsActivity extends AppCompatActivity implements View.OnC
 
            }
 
-
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -88,10 +79,8 @@ public class AnnouncementsActivity extends AppCompatActivity implements View.OnC
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 //clearing the previous User list
                 Users.clear();
-
              //getting all nodes
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //getting User from firebase console
@@ -116,7 +105,7 @@ public class AnnouncementsActivity extends AppCompatActivity implements View.OnC
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
 
-        final View dialogView = inflater.inflate(R.layout.activity_announcements_dialog, null);
+        final View dialogView = inflater.inflate(R.layout.layout_dialog_announcements, null);
         dialogBuilder.setView(dialogView);
         //Access Dialog views
         final EditText updateTextname = (EditText) dialogView.findViewById(R.id.updateText_title);
@@ -136,10 +125,8 @@ public class AnnouncementsActivity extends AppCompatActivity implements View.OnC
                 String title = updateTextname.getText().toString().trim();
                 String announcements = updateTextemail.getText().toString().trim();
                 //checking if the value is provided or not Here, you can Add More Validation as you required
-
                 if (!TextUtils.isEmpty(title)) {
                     if (!TextUtils.isEmpty(announcements)) {
-
                             //Method for update data
                             updateUser(userid, title, announcements);
                             b.dismiss();
@@ -148,7 +135,6 @@ public class AnnouncementsActivity extends AppCompatActivity implements View.OnC
 
             }
         });
-
         // Click listener for Delete data
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,28 +165,19 @@ public class AnnouncementsActivity extends AppCompatActivity implements View.OnC
         return true;
     }
 
-
     private void addUser() {
-
-
         //getting the values to save
         String name = editTextTile.getText().toString().trim();
         String email = editTextAnnouncements.getText().toString().trim();
-
-
         //checking if the value is provided or not Here, you can Add More Validation as you required
-
         if (!TextUtils.isEmpty(name)) {
             if (!TextUtils.isEmpty(email)) {
-
-
                     //it will create a unique id and we will use it as the Primary Key for our User
                     String id = databaseReference.push().getKey();
                     //creating an User Object
                     AnnouncementsGetterSetter User = new AnnouncementsGetterSetter(id, name, email);
                     //Saving the User
                     databaseReference.child(id).setValue(User);
-
                     editTextTile.setText("");
                     editTextAnnouncements.setText("");
                     Toast.makeText(this, "Announcements added", Toast.LENGTH_LONG).show();
