@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">AdminLoginActivity</string>
-
+    <string name="app_name">Admin Portal</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
 </resources>

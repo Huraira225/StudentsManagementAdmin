@@ -1,6 +1,8 @@
-package com.example.adminloginactivity.activities;
+package com.example.adminportal.activities;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,7 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.adminloginactivity.R;
+import com.example.adminportal.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -92,10 +94,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                        SharedPreferences preferences = getSharedPreferences("admin", Context.MODE_PRIVATE);
                        SharedPreferences.Editor editor = preferences.edit();
                        editor.putString("isadminLogin","adminLogout");
-                       editor.commit();
-                       auth.getInstance().signOut();
-                       Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                       startActivity(intent);
+                       AlertDialog.Builder alert = new AlertDialog.Builder(HomeActivity.this);
+                       alert.setMessage("Are you sure?")
+                               .setPositiveButton("Logout", new DialogInterface.OnClickListener()                 {
+
+                                   public void onClick(DialogInterface dialog, int which) {
+                                       auth.getInstance().signOut();
+                                       Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                                       startActivity(intent);
+                                   }
+                               }).setNegativeButton("Cancel", null);
+
+                       AlertDialog alert1 = alert.create();
+                       alert1.show();
                        break;
                }
                return true;

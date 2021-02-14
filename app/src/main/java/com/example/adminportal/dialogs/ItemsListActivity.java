@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.dialogs;
+package com.example.adminportal.dialogs;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.adminloginactivity.classes.RegisterUsers;
-import com.example.adminloginactivity.R;
+import com.example.adminportal.classes.RegisterUsers;
+import com.example.adminportal.R;
 
 import java.util.List;
 

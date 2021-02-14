@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.activities;
+package com.example.adminportal.activities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,9 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.adminloginactivity.classes.AnnouncementsGetterSetter;
-import com.example.adminloginactivity.adapters.AnnouncementsList;
-import com.example.adminloginactivity.R;
+import com.example.adminportal.classes.AnnouncementsGetterSetter;
+import com.example.adminportal.adapters.AnnouncementsList;
+import com.example.adminportal.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

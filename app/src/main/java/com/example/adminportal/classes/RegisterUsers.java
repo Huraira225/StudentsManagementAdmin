@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.classes;
+package com.example.adminportal.classes;
 
 public class RegisterUsers {
     String firstname,lastname,username,cnic,phoneno, email, approve, id;

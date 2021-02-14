@@ -1,4 +1,4 @@
-package com.example.adminloginactivity;
+package com.example.adminportal;
 
 import android.content.Context;
 

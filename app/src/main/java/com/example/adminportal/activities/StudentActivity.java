@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.activities;
+package com.example.adminportal.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,9 +17,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.adminloginactivity.dialogs.ItemsListActivity;
-import com.example.adminloginactivity.R;
-import com.example.adminloginactivity.classes.RegisterUsers;
+import com.example.adminportal.dialogs.ItemsListActivity;
+import com.example.adminportal.R;
+import com.example.adminportal.classes.RegisterUsers;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,7 +48,7 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
         textView.setOnClickListener(this);
         Users = new ArrayList<>();
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByChild("approve").equalTo("yes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //clearing the previous User list

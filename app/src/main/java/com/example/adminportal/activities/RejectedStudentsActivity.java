@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.activities;
+package com.example.adminportal.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,10 +15,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.adminloginactivity.dialogs.ApprovalItemsListActivity;
-import com.example.adminloginactivity.mailAPI.JavaMailAPI;
-import com.example.adminloginactivity.R;
-import com.example.adminloginactivity.classes.RegisterUsers;
+import com.example.adminportal.dialogs.ApprovalItemsListActivity;
+import com.example.adminportal.mailAPI.JavaMailAPI;
+import com.example.adminportal.R;
+import com.example.adminportal.classes.RegisterUsers;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

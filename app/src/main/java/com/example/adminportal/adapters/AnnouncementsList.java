@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.adapters;
+package com.example.adminportal.adapters;
 
 
 import android.app.Activity;
@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.adminloginactivity.classes.AnnouncementsGetterSetter;
-import com.example.adminloginactivity.R;
+import com.example.adminportal.classes.AnnouncementsGetterSetter;
+import com.example.adminportal.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

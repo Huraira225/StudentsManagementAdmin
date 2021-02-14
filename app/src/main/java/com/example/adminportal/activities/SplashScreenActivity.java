@@ -1,4 +1,4 @@
-package com.example.adminloginactivity.activities;
+package com.example.adminportal.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.adminloginactivity.R;
+import com.example.adminportal.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
